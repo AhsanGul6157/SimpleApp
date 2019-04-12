@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single"
+       >
+        <item
+            android:id="@+id/nav_my_orders"
+            android:icon="@drawable/order"
+            android:title="My Orders"
+            android:iconTint="@color/colorPink"/>
+
+        <item
+            android:id="@+id/nav_my_profile"
+            android:icon="@drawable/user"
+            android:title="My Profile"
+            android:iconTint="@color/colorPink"
+            android:visible="true"/>
+        <item
+            android:id="@+id/nav_my_addresses"
+            android:icon="@drawable/location"
+            android:title="My addresses"
+            android:iconTint="@color/colorPink"
+            android:visible="true"/>
+        <item
+            android:id="@+id/nav_my_vouchers"
+            android:icon="@drawable/voucher"
+            android:title="My Vouchers"
+            android:iconTint="@color/colorPink"
+            android:visible="true"/>
+
+        <item
+            android:id="@+id/nav_help_center"
+            android:icon="@drawable/info"
+            android:iconTint="@color/colorPink"
+            android:title="Help Center"
+            android:visible="true"/>
+        <item
+            android:id="@+id/nav_invite_friends"
+            android:icon="@drawable/gift"
+            android:iconTint="@color/colorPink"
+            android:title="Invite Friends"
+            android:visible="true"/>
+
+    </group>
+
+    <group android:id="@+id/dummy">
+            <item
+                android:id="@+id/nav_settings"
+                android:title="Settings" />
+            <item
+                android:id="@+id/nav_tersm_conditions"
+                android:title="Terms &amp; Conditions / Policy" />
+
+        <item
+            android:id="@+id/nav_log_out"
+            android:title="@string/log_out"
+            android:visible="true"/>
+    </group>
+
+
+
+</menu>
