@@ -1,20 +1,30 @@
 
 package com.example.ahsannaveed.foodpandaappclone;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Model {
 
+    @SerializedName("Exclusive Discounted Deals")
+    @Expose
+    private List<ExclusiveDiscountedDeal> exclusiveDiscountedDeals = null;
+//    @SerializedName("Handi Specialities")
+//    @Expose
+//    private List<HandiSpeciality> handiSpecialities = null;
+    @SerializedName("Salad")
+    @Expose
+    private List<Salad> salad = null;
+    @SerializedName("Soup")
+    @Expose
+    private List<Soup> soup = null;
     @SerializedName("delivery")
     @Expose
     private String delivery;
-    @SerializedName("headingTitle")
+    @SerializedName("iamge")
     @Expose
-    private String headingTitle;
-    @SerializedName("image")
-    @Expose
-    private String image;
+    private String iamge;
     @SerializedName("price")
     @Expose
     private String price;
@@ -24,9 +34,38 @@ public class Model {
     @SerializedName("title")
     @Expose
     private String title;
-    @SerializedName("iamge")
-    @Expose
-    private String iamge;
+
+    public List<ExclusiveDiscountedDeal> getExclusiveDiscountedDeals() {
+        return exclusiveDiscountedDeals;
+    }
+
+    public void setExclusiveDiscountedDeals(List<ExclusiveDiscountedDeal> exclusiveDiscountedDeals) {
+        this.exclusiveDiscountedDeals = exclusiveDiscountedDeals;
+    }
+
+//    public List<HandiSpeciality> getHandiSpecialities() {
+//        return handiSpecialities;
+//    }
+//
+//    public void setHandiSpecialities(List<HandiSpeciality> handiSpecialities) {
+//        this.handiSpecialities = handiSpecialities;
+//    }
+
+    public List<Salad> getSalad() {
+        return salad;
+    }
+
+    public void setSalad(List<Salad> salad) {
+        this.salad = salad;
+    }
+
+    public List<Soup> getSoup() {
+        return soup;
+    }
+
+    public void setSoup(List<Soup> soup) {
+        this.soup = soup;
+    }
 
     public String getDelivery() {
         return delivery;
@@ -36,20 +75,12 @@ public class Model {
         this.delivery = delivery;
     }
 
-    public String getHeadingTitle() {
-        return headingTitle;
+    public String getIamge() {
+        return iamge;
     }
 
-    public void setHeadingTitle(String headingTitle) {
-        this.headingTitle = headingTitle;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
+    public void setIamge(String iamge) {
+        this.iamge = iamge;
     }
 
     public String getPrice() {
@@ -74,14 +105,6 @@ public class Model {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getIamge() {
-        return iamge;
-    }
-
-    public void setIamge(String iamge) {
-        this.iamge = iamge;
     }
 
 }

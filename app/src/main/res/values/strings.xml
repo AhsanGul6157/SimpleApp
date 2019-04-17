@@ -36,7 +36,10 @@
     <string name="your_email_here_to_reset_password">your email here to reset password</string>
     <string name="log_out">Log out</string>
     <string name="cuisine_or_a_restaurant_name">Cuisine or a restaurant name</string>
-    <string name="fast_delivery">Fast Delivery</string>
+    <string name="fast_delivery_1">Fast Delivery</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
