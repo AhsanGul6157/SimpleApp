@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Tab1 extends Fragment {
     private Retrofit retrofit;
     private Tab1RecyclerAdapter adapter;
-//    TextView title;
+    //    TextView title;
     RecyclerView tab_recycler;
 
     @Override
@@ -37,22 +37,21 @@ public class Tab1 extends Fragment {
         tab_recycler = view.findViewById(R.id.tab_recycler);
         tab_recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
-       getEx_dis_DealApiInterface();
+        getEx_dis_DealApiInterface();
 
         return view;
 
     }
 
 
-
     //main listApi Interface method, called int the on create method
-    public void getEx_dis_DealApiInterface(){
+    public void getEx_dis_DealApiInterface() {
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(Ex_Dis_DealApiInterface.BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-       Ex_Dis_DealApiInterface ex_dis_dealApiInterface =  retrofit.create(Ex_Dis_DealApiInterface.class);
+        Ex_Dis_DealApiInterface ex_dis_dealApiInterface = retrofit.create(Ex_Dis_DealApiInterface.class);
         Call<List<ExclusiveDiscountedDeal>> call = ex_dis_dealApiInterface.getDataDeal();
         call.enqueue(new Callback<List<ExclusiveDiscountedDeal>>() {
             @Override
@@ -62,7 +61,7 @@ public class Tab1 extends Fragment {
 
             @Override
             public void onFailure(Call<List<ExclusiveDiscountedDeal>> call, Throwable t) {
-                Toast.makeText(getContext(), "Error is"+t, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error is" + t, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -71,7 +70,7 @@ public class Tab1 extends Fragment {
 
     private void getDataDeal(List<ExclusiveDiscountedDeal> DataDealList) {
 
-        adapter= new Tab1RecyclerAdapter(DataDealList,getContext());
+        adapter = new Tab1RecyclerAdapter(DataDealList, getContext());
         tab_recycler.setAdapter(adapter);
 
     }

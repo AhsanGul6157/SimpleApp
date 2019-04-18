@@ -1,48 +1,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:facebook="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-       >
+        android:orientation="horizontal">
+
         <ImageView
+            android:id="@+id/create_account_cross_image"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@drawable/cross_out"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
             android:layout_marginLeft="15dp"
-            android:id="@+id/create_account_cross_image"
-            android:layout_marginStart="15dp"/>
+            android:layout_marginTop="20dp"
+            android:src="@drawable/cross_out" />
+
         <TextView
+            style="@style/Base.TextAppearance.AppCompat.Large"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/create_account"
-            android:layout_marginTop="22dp"
+            android:layout_marginStart="80dp"
             android:layout_marginLeft="60dp"
-            android:textStyle="normal"
+            android:layout_marginTop="22dp"
+            android:text="@string/create_account"
             android:textColor="@color/colorBlack"
-            style="@style/Base.TextAppearance.AppCompat.Large"
-            android:layout_marginStart="80dp" />
+            android:textStyle="normal" />
     </LinearLayout>
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_an_account_to_save_all"
-        android:layout_marginLeft="110dp"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="20dp"
-        style="@style/Base.TextAppearance.AppCompat.Medium"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/your_info_for_your_next_order"
-        android:layout_marginLeft="110dp"
-        android:layout_marginStart="110dp"
         style="@style/Base.TextAppearance.AppCompat.Medium"
-        />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="110dp"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/create_an_account_to_save_all" />
+
+    <TextView
+        style="@style/Base.TextAppearance.AppCompat.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="110dp"
+        android:layout_marginLeft="110dp"
+        android:text="@string/your_info_for_your_next_order" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
@@ -51,47 +54,47 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
-        facebook:com_facebook_login_text="log in with Facebook"
-        android:textAllCaps="true"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp"/>
+        android:paddingBottom="10dp"
+        android:textAllCaps="true"
+        facebook:com_facebook_login_text="log in with Facebook" />
+
     <LinearLayout
+        android:id="@+id/sign_up_mail"
         android:layout_width="215dp"
         android:layout_height="40dp"
-        android:orientation="horizontal"
         android:layout_gravity="center"
         android:background="@color/colorPink"
-        android:id="@+id/sign_up_mail"
-       >
+        android:orientation="horizontal">
+
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/message"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            />
+            android:src="@drawable/message" />
+
         <TextView
 
+            style="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="@string/sign_up_with_email"
             android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
-            style="@style/Base.TextAppearance.AppCompat.Medium"
-            />
+            android:textColor="@color/white" />
     </LinearLayout>
+
     <TextView
+        android:id="@+id/already_member_log_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/already_a_member_log_in"
-        android:id="@+id/already_member_log_in"
         android:layout_marginTop="20dp"
+        android:text="@string/already_a_member_log_in"
         android:textColor="@color/colorPink"
-        android:textStyle="normal"/>
-
+        android:textStyle="normal" />
 
 
 </LinearLayout>

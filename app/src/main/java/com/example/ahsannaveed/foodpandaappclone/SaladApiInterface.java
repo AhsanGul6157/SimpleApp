@@ -7,6 +7,7 @@ import retrofit2.http.GET;
 
 public interface SaladApiInterface {
     String BaseURL = "https://foodpandaappclone.firebaseio.com/";
+
     @GET("Data/list01/0/Salad/.json")
     Call<List<Salad>> getDataSalad();
 

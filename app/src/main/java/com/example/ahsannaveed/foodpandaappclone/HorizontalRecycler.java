@@ -24,7 +24,6 @@ public class HorizontalRecycler extends RecyclerView.Adapter<HorizontalRecycler.
     private Context context;
 
 
-
     public HorizontalRecycler(List<Model> dataList, Context context) {
         this.dataList = dataList;
         this.context = context;
@@ -75,7 +74,6 @@ public class HorizontalRecycler extends RecyclerView.Adapter<HorizontalRecycler.
 
         }
     }
-
 
 
 }

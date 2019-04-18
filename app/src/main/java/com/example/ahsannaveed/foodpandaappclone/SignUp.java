@@ -69,7 +69,6 @@ public class SignUp extends AppCompatActivity {
         });
 
 
-
         join_Now_Button.setOnClickListener(new View.OnClickListener() {
 
             @Override

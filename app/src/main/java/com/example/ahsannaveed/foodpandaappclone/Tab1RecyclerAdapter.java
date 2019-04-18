@@ -12,7 +12,6 @@ import android.widget.TextView;
 import java.util.List;
 
 
-
 public class Tab1RecyclerAdapter extends RecyclerView.Adapter<Tab1RecyclerAdapter.ViewHolder> {
 
     private List<ExclusiveDiscountedDeal> DataDealList;
@@ -27,7 +26,7 @@ public class Tab1RecyclerAdapter extends RecyclerView.Adapter<Tab1RecyclerAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view  = inflater.inflate(R.layout.exclusive_discount_deals_items,viewGroup,false);
+        View view = inflater.inflate(R.layout.exclusive_discount_deals_items, viewGroup, false);
 
         return new ViewHolder(view);
 

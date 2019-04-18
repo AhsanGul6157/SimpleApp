@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class MainRecyclerViewAdapter  extends RecyclerView.Adapter<MainRecyclerViewAdapter.MainViewHolder> {
+public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewAdapter.MainViewHolder> {
     private List<MainModel> dataListMain;
 //   private TextView hading_Title_Text;
 
@@ -28,7 +28,7 @@ public class MainRecyclerViewAdapter  extends RecyclerView.Adapter<MainRecyclerV
     @Override
     public MainViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.main_recycler_view_layout,viewGroup,false);
+        View view = inflater.inflate(R.layout.main_recycler_view_layout, viewGroup, false);
 
         return new MainViewHolder(view);
     }
@@ -54,13 +54,13 @@ public class MainRecyclerViewAdapter  extends RecyclerView.Adapter<MainRecyclerV
         ImageView imageViewMain;
         //        TextView heading_Title_Text;
         TextView titleTextViewMain;
-        TextView  subtitleTextViewMain;
-        TextView  priceTextViewMain;
-        TextView  deliveryTextViewMain;
+        TextView subtitleTextViewMain;
+        TextView priceTextViewMain;
+        TextView deliveryTextViewMain;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
-           imageViewMain = itemView.findViewById(R.id.iamgeview_main_list);
+            imageViewMain = itemView.findViewById(R.id.iamgeview_main_list);
             titleTextViewMain = itemView.findViewById(R.id.textview_title_main);
             subtitleTextViewMain = itemView.findViewById(R.id.textView_subtitle_main);
             priceTextViewMain = itemView.findViewById(R.id.textView_price_main);

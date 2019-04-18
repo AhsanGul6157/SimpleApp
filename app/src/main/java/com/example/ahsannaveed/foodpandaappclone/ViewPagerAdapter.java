@@ -8,7 +8,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     int noOfTabs;
 
 
-    public ViewPagerAdapter(FragmentManager fm, int noOfTabs ) {
+    public ViewPagerAdapter(FragmentManager fm, int noOfTabs) {
         super(fm);
         this.noOfTabs = noOfTabs;
 
@@ -16,10 +16,10 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        switch(i){
+        switch (i) {
             case 0:
-               Tab1 tab1 = new Tab1();
-               return tab1;
+                Tab1 tab1 = new Tab1();
+                return tab1;
 
             case 1:
                 Tab2 tab2 = new Tab2();
@@ -34,7 +34,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 return tab4;
 
 
-             default:
+            default:
                 return null;
 
 //            return null;

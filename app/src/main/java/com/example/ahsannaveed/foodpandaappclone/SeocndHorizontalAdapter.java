@@ -29,7 +29,7 @@ public class SeocndHorizontalAdapter extends RecyclerView.Adapter<SeocndHorizont
     @Override
     public SecondViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-       View view = inflater.inflate(R.layout.second_item_horizontal,viewGroup,false);
+        View view = inflater.inflate(R.layout.second_item_horizontal, viewGroup, false);
         return new SecondViewHolder(view);
     }
 
@@ -48,13 +48,13 @@ public class SeocndHorizontalAdapter extends RecyclerView.Adapter<SeocndHorizont
         return dataList1.size();
     }
 
-    public class SecondViewHolder extends RecyclerView.ViewHolder{
+    public class SecondViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView1;
         //        TextView heading_Title_Text;
         TextView titleTextView1;
-        TextView  subtitleTextView1;
-        TextView  priceTextView1;
-        TextView  deliveryTextView1;
+        TextView subtitleTextView1;
+        TextView priceTextView1;
+        TextView deliveryTextView1;
 
         public SecondViewHolder(@NonNull View itemView) {
             super(itemView);

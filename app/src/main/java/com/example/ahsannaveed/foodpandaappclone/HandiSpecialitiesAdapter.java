@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class HandiSpecialitiesAdapter extends RecyclerView.Adapter<HandiSpeciali
     @Override
     public HandiSpecialitiesViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.handispecialities_list_items,viewGroup,false);
+        View view = inflater.inflate(R.layout.handispecialities_list_items, viewGroup, false);
 
         return new HandiSpecialitiesViewHolder(view);
     }
@@ -35,7 +36,7 @@ public class HandiSpecialitiesAdapter extends RecyclerView.Adapter<HandiSpeciali
     public void onBindViewHolder(@NonNull HandiSpecialitiesViewHolder handiSpecialitiesViewHolder, int i) {
         handiSpecialitiesViewHolder.titleText.setText(HandiSpecialitiesDataList.get(i).getTitle());
         HandiSpeciality handiSpecialitiesModel = HandiSpecialitiesDataList.get(i);
-        Glide.with(context).load(handiSpecialitiesModel.getIamge()).into(handiSpecialitiesViewHolder.imageView);
+        Glide.with(context).load(handiSpecialitiesModel.getIamge()).apply(new RequestOptions().circleCrop()).into(handiSpecialitiesViewHolder.imageView);
         handiSpecialitiesViewHolder.priceText.setText(HandiSpecialitiesDataList.get(i).getPrice());
 
 
@@ -46,7 +47,7 @@ public class HandiSpecialitiesAdapter extends RecyclerView.Adapter<HandiSpeciali
         return HandiSpecialitiesDataList.size();
     }
 
-    public class HandiSpecialitiesViewHolder extends RecyclerView.ViewHolder{
+    public class HandiSpecialitiesViewHolder extends RecyclerView.ViewHolder {
         TextView titleText;
         ImageView imageView;
         TextView priceText;

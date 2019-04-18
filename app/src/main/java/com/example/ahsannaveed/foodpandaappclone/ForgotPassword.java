@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class ForgotPassword extends AppCompatActivity {
-private ImageView crossBtn;
-private TextInputLayout forgot_email_et;
+    private ImageView crossBtn;
+    private TextInputLayout forgot_email_et;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ private TextInputLayout forgot_email_et;
         crossBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Login.class);
+                Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
             }
         });

@@ -25,14 +25,12 @@ public class Tab2 extends Fragment {
     SoupApiAdapter adapter;
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View view =  inflater.inflate(R.layout.fragment_tab2, container, false);
-       tab2_recycler = view.findViewById(R.id.tab2_recycler);
+        View view = inflater.inflate(R.layout.fragment_tab2, container, false);
+        tab2_recycler = view.findViewById(R.id.tab2_recycler);
 
 //        tab2_recycler = view.findViewById(R.id.tab2_recycler);
         tab2_recycler.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -40,13 +38,13 @@ public class Tab2 extends Fragment {
         return view;
     }
 
-    public void getDataSoup(){
+    public void getDataSoup() {
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(SoupApiInterface.BaseURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        SoupApiInterface soupApiInterface =  retrofit.create(SoupApiInterface.class);
+        SoupApiInterface soupApiInterface = retrofit.create(SoupApiInterface.class);
         Call<List<Soup>> call = soupApiInterface.getDataSoup();
         call.enqueue(new Callback<List<Soup>>() {
             @Override
@@ -56,7 +54,7 @@ public class Tab2 extends Fragment {
 
             @Override
             public void onFailure(Call<List<Soup>> call, Throwable t) {
-                Toast.makeText(getContext(), "Error is"+t, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error is" + t, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -65,12 +63,10 @@ public class Tab2 extends Fragment {
 
     private void getDataSoup(List<Soup> SoupList) {
 
-        adapter= new SoupApiAdapter(SoupList,getContext());
+        adapter = new SoupApiAdapter(SoupList, getContext());
         tab2_recycler.setAdapter(adapter);
 
     }
-
-
 
 
 }

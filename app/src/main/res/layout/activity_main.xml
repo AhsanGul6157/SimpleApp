@@ -20,11 +20,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:itemIconTint="@color/colorPink"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer"
-        app:itemTextAppearance="@style/Base.TextAppearance.AppCompat.Small"/>
+        app:itemIconTint="@color/colorPink"
+        app:itemTextAppearance="@style/Base.TextAppearance.AppCompat.Small"
+        app:menu="@menu/activity_main_drawer" />
 
 
 </android.support.v4.widget.DrawerLayout>

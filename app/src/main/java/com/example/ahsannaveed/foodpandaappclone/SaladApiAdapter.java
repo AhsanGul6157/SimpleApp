@@ -10,10 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
-public class SaladApiAdapter  extends RecyclerView.Adapter<SaladApiAdapter.SaladViewHolder> {
+public class SaladApiAdapter extends RecyclerView.Adapter<SaladApiAdapter.SaladViewHolder> {
     private List<Salad> SaladDataList;
     private Context context;
 
@@ -23,12 +24,11 @@ public class SaladApiAdapter  extends RecyclerView.Adapter<SaladApiAdapter.Salad
     }
 
 
-
     @NonNull
     @Override
     public SaladViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.salad_items_list,viewGroup,false);
+        View view = inflater.inflate(R.layout.salad_items_list, viewGroup, false);
 
         return new SaladViewHolder(view);
     }
@@ -36,7 +36,7 @@ public class SaladApiAdapter  extends RecyclerView.Adapter<SaladApiAdapter.Salad
     @Override
     public void onBindViewHolder(@NonNull SaladViewHolder saladViewHolder, int i) {
         saladViewHolder.saladTitleText.setText(SaladDataList.get(i).getTitle());
-        Glide.with(context).load(SaladDataList.get(i).getIamge()).into(saladViewHolder.saladImage);
+        Glide.with(context).load(SaladDataList.get(i).getIamge()).apply(new RequestOptions().circleCrop()).into(saladViewHolder.saladImage);
         saladViewHolder.saladPrice.setText(SaladDataList.get(i).getPrice());
 
     }
@@ -46,7 +46,7 @@ public class SaladApiAdapter  extends RecyclerView.Adapter<SaladApiAdapter.Salad
         return SaladDataList.size();
     }
 
-    public class SaladViewHolder extends RecyclerView.ViewHolder{
+    public class SaladViewHolder extends RecyclerView.ViewHolder {
         TextView saladTitleText;
         ImageView saladImage;
         TextView saladPrice;

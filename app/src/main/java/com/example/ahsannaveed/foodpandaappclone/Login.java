@@ -120,7 +120,7 @@ public class Login extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                 FirebaseAuth.getInstance().getCurrentUser();
+                FirebaseAuth.getInstance().getCurrentUser();
                 String email_et = email.getEditText().toString().trim();
                 String pass_et = password.getEditText().toString().trim();
 

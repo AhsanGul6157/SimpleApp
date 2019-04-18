@@ -31,33 +31,35 @@ public class Tab4 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tab4, container, false);
         tab4_recycler = view.findViewById(R.id.tab4_recycler);
         tab4_recycler.setLayoutManager(new LinearLayoutManager(getContext()));
-    getDataHandiSpecialaties();
+        getDataHandiSpecialaties();
 
-                return view;
+        return view;
     }
-public void getDataHandiSpecialaties(){
-    retrofit = new Retrofit.Builder()
-            .baseUrl(HandiSpecialityApiInterface.BaseURL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-    HandiSpecialityApiInterface handiSpecialityApiInterface =  retrofit.create(HandiSpecialityApiInterface.class);
-    Call<List<HandiSpeciality>> call = handiSpecialityApiInterface.getDataHandiSpecialaties();
-    call.enqueue(new Callback<List<HandiSpeciality>>() {
-        @Override
-        public void onResponse(Call<List<HandiSpeciality>> call, Response<List<HandiSpeciality>> response) {
-            getDataHandiSpecialaties(response.body());
-        }
 
-        @Override
-        public void onFailure(Call<List<HandiSpeciality>> call, Throwable t) {
-            Toast.makeText(getContext() ,""+t, Toast.LENGTH_SHORT).show();
-        }
-    });
-}
-private void getDataHandiSpecialaties(List<HandiSpeciality> handiSpecialitiesDataList){
-    adapter= new HandiSpecialitiesAdapter(handiSpecialitiesDataList,getContext());
-    tab4_recycler.setAdapter(adapter);
+    public void getDataHandiSpecialaties() {
+        retrofit = new Retrofit.Builder()
+                .baseUrl(HandiSpecialityApiInterface.BaseURL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        HandiSpecialityApiInterface handiSpecialityApiInterface = retrofit.create(HandiSpecialityApiInterface.class);
+        Call<List<HandiSpeciality>> call = handiSpecialityApiInterface.getDataHandiSpecialaties();
+        call.enqueue(new Callback<List<HandiSpeciality>>() {
+            @Override
+            public void onResponse(Call<List<HandiSpeciality>> call, Response<List<HandiSpeciality>> response) {
+                getDataHandiSpecialaties(response.body());
+            }
 
-}
+            @Override
+            public void onFailure(Call<List<HandiSpeciality>> call, Throwable t) {
+                Toast.makeText(getContext(), "" + t, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void getDataHandiSpecialaties(List<HandiSpeciality> handiSpecialitiesDataList) {
+        adapter = new HandiSpecialitiesAdapter(handiSpecialitiesDataList, getContext());
+        tab4_recycler.setAdapter(adapter);
+
+    }
 
 }

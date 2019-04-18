@@ -7,6 +7,7 @@ import retrofit2.http.GET;
 
 public interface MainApiInterface {
     String BASEURL = "https://foodpandaappclone.firebaseio.com/";
+
     @GET("Data/mainlist/.json")
         //3...defining method through which we will call the data
 

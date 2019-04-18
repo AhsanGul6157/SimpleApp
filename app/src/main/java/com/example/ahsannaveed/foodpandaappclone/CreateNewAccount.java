@@ -38,7 +38,7 @@ public class CreateNewAccount extends AppCompatActivity {
         crossImageCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Login.class);
+                Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
             }
         });
@@ -47,7 +47,7 @@ public class CreateNewAccount extends AppCompatActivity {
         sign_up_with_Email_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),SignUp.class);
+                Intent intent = new Intent(getApplicationContext(), SignUp.class);
                 startActivity(intent);
             }
         });
@@ -55,7 +55,7 @@ public class CreateNewAccount extends AppCompatActivity {
         alreadyText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Login.class);
+                Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
             }
         });
@@ -70,7 +70,7 @@ public class CreateNewAccount extends AppCompatActivity {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         setFinishOnTouchOutside(false);
-                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                     }
 

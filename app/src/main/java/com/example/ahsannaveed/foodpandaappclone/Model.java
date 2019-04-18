@@ -2,6 +2,7 @@
 package com.example.ahsannaveed.foodpandaappclone;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -10,7 +11,7 @@ public class Model {
     @SerializedName("Exclusive Discounted Deals")
     @Expose
     private List<ExclusiveDiscountedDeal> exclusiveDiscountedDeals = null;
-//    @SerializedName("Handi Specialities")
+    //    @SerializedName("Handi Specialities")
 //    @Expose
 //    private List<HandiSpeciality> handiSpecialities = null;
     @SerializedName("Salad")

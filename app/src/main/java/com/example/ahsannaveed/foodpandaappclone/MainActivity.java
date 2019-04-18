@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         recyclerView = findViewById(R.id.recycler_view);
         secondRecyclerView = findViewById(R.id.seocnd_recycler_view);
         mainRecyclerView = findViewById(R.id.main_recycler_view);
-//        progressBar = findViewById(R.id.progressBar);
 
         setSupportActionBar(toolbar);
         //step4.. create retrofit object
@@ -331,6 +330,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = new Intent(MainActivity.this, ViewPagerActivity.class);
         startActivity(intent);
     }
+
+    public void secondHorizontalClicked(View view) {
+        Intent intent = new Intent(MainActivity.this, ViewPagerActivity.class);
+        startActivity(intent);
+    }
+
+    public void mainHorizontalClicked(View view) {
+        Intent intent = new Intent(MainActivity.this, ViewPagerActivity.class);
+        startActivity(intent);
+    }
+
 
 //    public void loadProgressbarSpinner() {
 ////       progressBar.se

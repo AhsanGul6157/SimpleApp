@@ -10,12 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
 public class SoupApiAdapter extends RecyclerView.Adapter<SoupApiAdapter.SoupViewHolder> {
-        private List<Soup> SoupList;
-        private Context context;
+    private List<Soup> SoupList;
+    private Context context;
 
     public SoupApiAdapter(List<Soup> soupList, Context context) {
         SoupList = soupList;
@@ -26,7 +27,7 @@ public class SoupApiAdapter extends RecyclerView.Adapter<SoupApiAdapter.SoupView
     @Override
     public SoupViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.soup_items_layout,viewGroup,false);
+        View view = inflater.inflate(R.layout.soup_items_layout, viewGroup, false);
         return new SoupViewHolder(view);
     }
 
@@ -34,9 +35,8 @@ public class SoupApiAdapter extends RecyclerView.Adapter<SoupApiAdapter.SoupView
     public void onBindViewHolder(@NonNull SoupViewHolder soupViewHolder, int i) {
         soupViewHolder.titleText.setText(SoupList.get(i).getTitle());
         Soup soupModel = SoupList.get(i);
-        Glide.with(context).load(soupModel.getIamge()).into(soupViewHolder.imageView);
+        Glide.with(context).load(soupModel.getIamge()).apply(new RequestOptions().circleCrop()).into(soupViewHolder.imageView);
         soupViewHolder.priceText.setText(SoupList.get(i).getPrice());
-
 
 
     }
@@ -47,10 +47,7 @@ public class SoupApiAdapter extends RecyclerView.Adapter<SoupApiAdapter.SoupView
     }
 
 
-
-
-
-    public class SoupViewHolder extends RecyclerView.ViewHolder{
+    public class SoupViewHolder extends RecyclerView.ViewHolder {
         TextView titleText;
         ImageView imageView;
         TextView priceText;

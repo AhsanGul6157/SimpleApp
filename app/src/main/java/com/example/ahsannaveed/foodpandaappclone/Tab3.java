@@ -31,16 +31,16 @@ public class Tab3 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tab3, container, false);
         tab3_recycler = view.findViewById(R.id.tab3_recycler);
         tab3_recycler.setLayoutManager(new LinearLayoutManager(getContext()));
-       dataSalad();
+        dataSalad();
         return view;
     }
 
-    public void dataSalad(){
+    public void dataSalad() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(SecondApiInterface.BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        SaladApiInterface saladApiInterface =  retrofit.create(SaladApiInterface.class);
+        SaladApiInterface saladApiInterface = retrofit.create(SaladApiInterface.class);
         Call<List<Salad>> call = saladApiInterface.getDataSalad();
         call.enqueue(new Callback<List<Salad>>() {
             @Override
@@ -50,7 +50,7 @@ public class Tab3 extends Fragment {
 
             @Override
             public void onFailure(Call<List<Salad>> call, Throwable t) {
-                Toast.makeText(getContext(), "Error is"+t, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error is" + t, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -58,10 +58,9 @@ public class Tab3 extends Fragment {
     }
 
     private void getDataSalad(List<Salad> saladDataList) {
-        adapter= new SaladApiAdapter(saladDataList,getContext());
+        adapter = new SaladApiAdapter(saladDataList, getContext());
         tab3_recycler.setAdapter(adapter);
     }
-
 
 
 }
