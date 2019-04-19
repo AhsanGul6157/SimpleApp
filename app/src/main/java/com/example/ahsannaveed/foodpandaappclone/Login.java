@@ -1,7 +1,7 @@
 package com.example.ahsannaveed.foodpandaappclone;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.hardware.input.InputManager;
 import android.os.Build;
@@ -52,6 +52,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.core.Context;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,8 +73,10 @@ public class Login extends AppCompatActivity {
     private Button signInButton;
     private TextView forgetPassword;
     private TextView creat_Account_Text;
-    TextInputLayout email;
-    TextInputLayout password;
+    EditText email;
+    EditText password;
+
+
 
 
     @Override
@@ -88,6 +91,10 @@ public class Login extends AppCompatActivity {
         crossImage = findViewById(R.id.cross_image);
         creat_Account_Text = findViewById(R.id.new_user);
         mAuth = FirebaseAuth.getInstance();
+
+
+
+
         //facebook login Button
         facebookLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,26 +128,19 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().getCurrentUser();
-                String email_et = email.getEditText().toString().trim();
-                String pass_et = password.getEditText().toString().trim();
+                String email_et = email.getText().toString().trim();
+                String pass_et = password.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email_et)) {
-                    email.setErrorEnabled(true);
+                    Toast.makeText(Login.this, "Please enter Email", Toast.LENGTH_SHORT).show();
 
-                } else {
-                    email.setError(null);
                 }
                 if (TextUtils.isEmpty(pass_et)) {
-                    password.setErrorEnabled(true);
-
-                } else {
-
-//                    setFinishOnTouchOutside(false);
-//                    Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                    startActivity(intent);
+                    Toast.makeText(Login.this, "Please enter password", Toast.LENGTH_SHORT).show();
                 }
-            }
+                else onAuthSuccessful();
+
+                }
         });
         //forget password
         forgetPassword.setOnClickListener(new View.OnClickListener() {
@@ -163,7 +163,51 @@ public class Login extends AppCompatActivity {
 
     }
 
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//// ...
+//// Initialize Firebase Auth
+//        mAuth = FirebaseAuth.getInstance();
+//
+//
+//
+//    }
+    public void onAuthSuccessful(){
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        mAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString())
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
 
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+
+                            final ProgressDialog progressDialog = new ProgressDialog(Login.this);
+                            progressDialog.setMessage("Loading..");
+                            progressDialog.setCancelable(false);
+                            progressDialog.show();
+                            //creating progress dialog while signing in
+
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Intent intent = new Intent(Login.this,MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(Login.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            /*Intent intent = new Intent(Login.this,Login.class);
+                            startActivity(intent);*/
+                        }
+
+                        // ...
+                    }
+                });
+    }
 }
 
 

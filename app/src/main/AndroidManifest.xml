@@ -3,6 +3,7 @@
     package="com.example.ahsannaveed.foodpandaappclone">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,14 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewPagerActivity"></activity>
+        <activity android:name=".InviteFriends"></activity>
+        <activity android:name=".VouchersList" />
+        <activity android:name=".AddressesList" />
+        <activity android:name=".OrdersList" />
+        <activity android:name=".FiltersActivity" />
+        <activity android:name=".ViewPagerActivity" />
         <activity android:name=".SignUp" />
         <activity android:name=".CreateNewAccount" />
         <activity android:name=".ForgotPassword" />
         <activity
             android:name=".SplashActivity"
             android:label="@string/title_activity_main"
-
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

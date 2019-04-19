@@ -32,11 +32,11 @@ import org.w3c.dom.Text;
 public class SignUp extends AppCompatActivity {
     private ImageView signup_Cross_Btn;
     private TextView already_Member_Text;
-    TextInputLayout first_Name_et;
-    TextInputLayout last_Name_et;
-    private TextInputLayout email_address_et;
-    private TextInputLayout phone_Number_et;
-    private TextInputLayout email_Password_et;
+    EditText first_Name_et;
+    EditText last_Name_et;
+    private EditText email_address_et;
+    private EditText phone_Number_et;
+    private EditText email_Password_et;
     private Button join_Now_Button;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -73,11 +73,11 @@ public class SignUp extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                final String firstName = first_Name_et.getEditText().toString().trim();
-                final String lastName = last_Name_et.getEditText().toString().trim();
-                String email = email_address_et.getEditText().toString().trim();
-                final String phoneNumber = phone_Number_et.getEditText().toString().trim();
-                String password = email_Password_et.getEditText().toString().trim();
+                final String firstName = first_Name_et.getText().toString().trim();
+                final String lastName = last_Name_et.getText().toString().trim();
+                final String email = email_address_et.getText().toString().trim();
+                final String phoneNumber = phone_Number_et.getText().toString().trim();
+                String password = email_Password_et.getText().toString().trim();
 
                 if (TextUtils.isEmpty(firstName)) {
                     first_Name_et.setError("Required");
@@ -95,7 +95,7 @@ public class SignUp extends AppCompatActivity {
                     email_Password_et.setError("Required");
                 }
                 if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(phoneNumber) && !TextUtils.isEmpty(password)) {
-                    mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    mAuth.createUserWithEmailAndPassword(email , password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -112,7 +112,7 @@ public class SignUp extends AppCompatActivity {
                                 startActivity(loginIntent);
 
                             } else {
-                                Toast.makeText(SignUp.this, "You got some error please check and try again", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUp.this, " Something went wrong! ", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

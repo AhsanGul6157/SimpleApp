@@ -24,7 +24,7 @@ public class ViewPagerActivity extends AppCompatActivity {
     ImageView topImageView;
 
     //    private CardView horizontalCardView;
-    String url = "https://firebasestorage.googleapis.com/v0/b/foodpandaappclone.appspot.com/o/food_images%2FFirst.png?alt=media&token=45fd5313-0371-4d37-a031-7273a8ed2957";
+    String url = "https://firebasestorage.googleapis.com/v0/b/foodpandaappclone.appspot.com/o/food_images%2FView_Pager.jpg?alt=media&token=7beaac7a-147f-4657-9540-d27aaf27c4ab";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

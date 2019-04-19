@@ -59,7 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <ImageView
                 android:layout_width="20dp"
@@ -72,10 +73,12 @@
             <EditText
                 android:id="@+id/searchbar_et"
                 android:layout_width="match_parent"
+                android:focusable="false"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
                 android:background="@null"
-                android:hint="@string/cuisine_or_a_restaurant_name" />
+                android:hint="@string/cuisine_or_a_restaurant_name"
+                />
 
             <View
                 android:layout_width="1dp"
@@ -92,7 +95,8 @@
                 android:layout_marginBottom="10dp"
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
-                android:src="@drawable/equilizer_bars" />
+                android:src="@drawable/equilizer_bars"
+                android:id="@+id/filters"/>
         </LinearLayout>
 
     </android.support.v7.widget.Toolbar>

@@ -47,6 +47,11 @@
     <string name="delivered_by_foodpanda">Delivered By FoodPanda</string>
     <string name="all_restaurants">All Restaurants</string>
     <string name="delivery_time">Delivery Time</string>
+    <string name="no_filters_available_yet">No Filters Available yet</string>
+    <string name="you_have_not_made_any_orders_yet">You have not made any orders yet!</string>
+    <string name="no_addresses_added_yet">No addresses added yet!</string>
+    <string name="no_vouchers_available_yet">No vouchers Available Yet!</string>
+    <string name="no_links_provided_yet">No links provided yet!</string>
 
 
 </resources>

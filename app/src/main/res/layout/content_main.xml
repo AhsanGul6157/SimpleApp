@@ -18,6 +18,7 @@
 
         <TextView
 
+            android:id="@+id/delivery_tv"
             style="@style/Base.TextAppearance.AppCompat.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,7 +26,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="10dp"
             android:text="@string/fast_delivery_1"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            android:visibility="gone"
+            />
         <!--main Recycler view embedding two horizontal recycler views in it-->
 
 
@@ -39,6 +42,7 @@
 
         <TextView
 
+            android:id="@+id/deliver_foodpanda_tv"
             style="@style/Base.TextAppearance.AppCompat.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,7 +50,8 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="10dp"
             android:text="@string/delivered_by_foodpanda"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            android:visibility="gone"/>
 
         <!--seocnd horizontal recycler view -->
         <android.support.v7.widget.RecyclerView
@@ -59,6 +64,7 @@
 
         <TextView
 
+            android:id="@+id/all_resturants"
             style="@style/Base.TextAppearance.AppCompat.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,7 +72,8 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="10dp"
             android:text="@string/all_restaurants"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            android:visibility="gone"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/main_recycler_view"

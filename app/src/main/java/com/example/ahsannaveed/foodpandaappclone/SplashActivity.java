@@ -1,11 +1,15 @@
 package com.example.ahsannaveed.foodpandaappclone;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -23,8 +27,7 @@ public class SplashActivity extends AppCompatActivity {
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
             }
-        }, 3000);
-
-
+        }, 2000);
     }
+
 }

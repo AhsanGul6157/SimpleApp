@@ -1,10 +1,13 @@
 package com.example.ahsannaveed.foodpandaappclone;
 
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,7 +26,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -52,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView createAccountText_Login;
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
+    private ImageView filter_image_view;
     private RecyclerView recyclerView;
     private NavigationView navigationView;
     private HorizontalRecycler adapter;
@@ -59,23 +66,69 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Retrofit retrofit;
     private DatabaseReference mDatabase;
     private TextView heading_Title_Text;
+    private EditText searchbar_et;
     //seocnd recycler
     private RecyclerView secondRecyclerView;
     private RecyclerView mainRecyclerView;
+    private TextView delivery_tv, deliver_foodpanda_tv, all_resturants;
+    private String user_email;
     private MainRecyclerViewAdapter mainRecyclerViewAdapter;
     //   LinearLayout horizontalLayout;
-    ProgressBar progressBar;
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth = FirebaseAuth.getInstance();
+
+        if (mAuth.getCurrentUser() != null) {
+            user_email = mAuth.getCurrentUser().getEmail();
+//        navigationView.getMenu().findItem(R.id.nav_log_out).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_log_out).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_my_profile).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_my_addresses).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_my_vouchers).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_help_center).setVisible(false);
+
+            createAccountText_Login.setText(user_email);
+            createAccountText_Login.setEnabled(false);
+        } else {
+
+            createAccountText_Login.setText("Log in / Create account");
+            createAccountText_Login.setEnabled(true);
+//        navigationView.getMenu().findItem(R.id.nav_log_out).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_log_out).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_my_profile).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_my_addresses).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_my_vouchers).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_help_center).setVisible(true);
+        }
+        delivery_tv.setVisibility(View.GONE);
+        deliver_foodpanda_tv.setVisibility(View.GONE);
+        all_resturants.setVisibility(View.GONE);
+//        isNetworkAvailable();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        createAccountText_Login = findViewById(R.id.create_account);
+//        createAccountText_Login = findViewById(R.id.create_account);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.recycler_view);
         secondRecyclerView = findViewById(R.id.seocnd_recycler_view);
         mainRecyclerView = findViewById(R.id.main_recycler_view);
+        filter_image_view = findViewById(R.id.filters);
+
+        searchbar_et = findViewById(R.id.searchbar_et);
+
+        delivery_tv = findViewById(R.id.delivery_tv);
+        deliver_foodpanda_tv = findViewById(R.id.deliver_foodpanda_tv);
+        all_resturants = findViewById(R.id.all_resturants);
+
+
+        hideKeyboardFrom(this);
 
         setSupportActionBar(toolbar);
         //step4.. create retrofit object
@@ -83,30 +136,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .baseUrl(ApiInterface.BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        //now create your api object means api class in your case it is ApiInterface
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("FoodPanda");
-        progressDialog.setMessage("Please Wait");
-        progressDialog.setCancelable(false);
 
-        progressDialog.show();
 
-        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-        Call<List<Model>> call = apiInterface.getData();
-        call.enqueue(new Callback<List<Model>>() {
-            @Override
-            public void onResponse(Call<List<Model>> call, Response<List<Model>> response) {
-                loadDataList(response.body());
-                progressDialog.dismiss();
-            }
+        if (isNetworkAvailable()) {
+//now create your api object means api class in your case it is ApiInterface
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("FoodPanda");
+            progressDialog.setMessage("Please Wait");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
 
-            @Override
-            public void onFailure(Call<List<Model>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "" + t, Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-            }
+            ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+            Call<List<Model>> call = apiInterface.getData();
+            call.enqueue(new Callback<List<Model>>() {
+                @Override
+                public void onResponse(Call<List<Model>> call, Response<List<Model>> response) {
+                    loadDataList(response.body());
+                    progressDialog.dismiss();
+                }
 
-        });
+                @Override
+                public void onFailure(Call<List<Model>> call, Throwable t) {
+                    Toast.makeText(MainActivity.this, "" + t, Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+
+            });
+            //    showData();
+            //calling second datalist method
+            secondApiInterface();
+            //main datalist method call
+            getMainApiInterface();
+        } else {
+            delivery_tv.setVisibility(View.GONE);
+            deliver_foodpanda_tv.setVisibility(View.GONE);
+            all_resturants.setVisibility(View.GONE);
+        }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -120,34 +185,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         hideMenuItems();
         navigationView.setNavigationItemSelectedListener(this);
 //        navigationView.getMenu().findItem(R.id.nav_log_out).setVisible(false);
-        navigationView.getMenu().findItem(R.id.nav_log_out).setVisible(true);
-        navigationView.getMenu().findItem(R.id.nav_my_profile).setVisible(true);
-        navigationView.getMenu().findItem(R.id.nav_my_addresses).setVisible(true);
-        navigationView.getMenu().findItem(R.id.nav_my_vouchers).setVisible(true);
+        navigationView.getMenu().findItem(R.id.nav_log_out).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_my_profile).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_my_addresses).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_my_vouchers).setVisible(false);
         navigationView.getMenu().findItem(R.id.nav_help_center).setVisible(true);
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View view = navigationView.getHeaderView(0);
-//        if (mUser != null) {
-//
-//            createAccountText_Login = view.findViewById(R.id.create_account);
-//            FirebaseUserMetadata name = mUser.getMetadata();
-//            createAccountText_Login.setText((CharSequence) name);
-//        }
+        createAccountText_Login = view.findViewById(R.id.create_account);
+        if (mUser != null) {
 
-//    showData();
-        //calling second datalist method
-        secondApiInterface();
-        //main datalist method call
-        getMainApiInterface();
+            FirebaseUserMetadata name = mUser.getMetadata();
+        }
+
         //load spinner
 //        loadProgressbarSpinner();
+        //listener on fitlers image
+        filter_image_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent filterIntent = new Intent(MainActivity.this, FiltersActivity.class);
+                startActivity(filterIntent);
+            }
+        });
 
 
     }
 
+    // hide soft input keyboard on edit text
+    public static void hideKeyboardFrom(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        View f = activity.getCurrentFocus();
+        if (null != f && null != f.getWindowToken() && EditText.class.isAssignableFrom(f.getClass()))
+            imm.hideSoftInputFromWindow(f.getWindowToken(), 0);
+        else
+            activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+    }
 
     @Override
     public void onBackPressed() {
@@ -191,21 +268,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_my_orders) {
             // Handle the camera action
+            Intent ordersIntent = new Intent(MainActivity.this, OrdersList.class);
+            startActivity(ordersIntent);
 
         } else if (id == R.id.nav_help_center) {
 
         } else if (id == R.id.nav_invite_friends) {
+            Intent inviteFriendsIntent = new Intent(MainActivity.this, InviteFriends.class);
+            startActivity(inviteFriendsIntent);
 
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_tersm_conditions) {
 
+        } else if (id == R.id.nav_my_addresses) {
+            Intent addressIntent = new Intent(MainActivity.this, AddressesList.class);
+            startActivity(addressIntent);
+        } else if (id == R.id.nav_my_vouchers) {
+            Intent vouchersIntent = new Intent(MainActivity.this, VouchersList.class);
+            startActivity(vouchersIntent);
         } else if (id == R.id.nav_log_out) {
+            FirebaseAuth.getInstance().signOut();
 //
             navigationView.getMenu().findItem(R.id.nav_log_out).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_my_profile).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_my_vouchers).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_my_addresses).setVisible(false);
+            Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -229,10 +318,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void login_Create_Account(View view) {
+//        view.setVisibility(View.GONE);
+
         Intent intent = new Intent(getApplicationContext(), Login.class);
         startActivity(intent);
     }
-
 
     private void loadDataList(List<Model> dataList) {
         recyclerView = findViewById(R.id.recycler_view);
@@ -282,6 +372,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onFailure(Call<List<SecondModel>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "" + t, Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
 
         });
@@ -316,11 +407,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onResponse(Call<List<MainModel>> call, Response<List<MainModel>> response) {
                 loadDataListMain(response.body());
                 progressDialog.dismiss();
+                delivery_tv.setVisibility(View.VISIBLE);
+                deliver_foodpanda_tv.setVisibility(View.VISIBLE);
+                all_resturants.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onFailure(Call<List<MainModel>> call, Throwable t) {
-
+                progressDialog.dismiss();
+                delivery_tv.setVisibility(View.VISIBLE);
+                deliver_foodpanda_tv.setVisibility(View.VISIBLE);
+                all_resturants.setVisibility(View.VISIBLE);
             }
         });
 
@@ -342,9 +439,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-//    public void loadProgressbarSpinner() {
-////       progressBar.se
-//    }
+    //check internet connected or not
+    private boolean isNetworkAvailable() {
 
+
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+//        Toast.makeText(this, "No internet connection available", Toast.LENGTH_SHORT).show();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+
+
+    }
 
 }

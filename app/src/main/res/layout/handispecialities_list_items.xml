@@ -25,7 +25,8 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:textStyle="normal" />
+                android:textStyle="normal"
+                android:paddingTop="10dp"/>
 
             <ImageView
                 android:id="@+id/handi_image"
@@ -45,9 +46,9 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:gravity="right"
-            android:paddingRight="2dp"
+            android:paddingRight="15dp"
             tools:ignore="RtlSymmetry"
-            android:paddingEnd="2dp" />
+            android:paddingEnd="15dp" />
 
         <View
             android:layout_width="match_parent"

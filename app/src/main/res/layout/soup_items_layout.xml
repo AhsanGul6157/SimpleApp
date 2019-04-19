@@ -45,7 +45,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:gravity="right"
-            android:paddingEnd="10dp"
+            android:paddingEnd="15dp"
             android:paddingRight="15dp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
